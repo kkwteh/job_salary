@@ -1,5 +1,13 @@
 import pandas as pd
-import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from collections import Counter
+from collections import defaultdict
+
+import hashlib
+import datetime
+import pickle
+
 df = pd.read_csv('job_salary_data/job_salary_data.csv')
 df.shape
 df.head()
@@ -7,7 +15,7 @@ df.head()
 # Missing data
 df.count()
 
-from collections import Counter
+
 Counter(df.ContractType)
 Counter(df.ContractTime)
 df.SalaryNormalized.median()
@@ -42,11 +50,11 @@ def design_matrix(raw_data, feature_registry_names):
 
 def labels(raw_data):
     return (raw_data.SalaryNormalized > 30000).astype(int)
+
 train_test_split_index = int(12200 * 0.7) # 70% of data for training, 30% of data for testing
 train_data = df.iloc[:train_test_split_index]
 test_data = df.iloc[train_test_split_index:]
 
-from collections import defaultdict
 category_median_salary_dict = defaultdict(lambda: 30000)
 category_median_salary_dict.update(train_data[['Category', 'SalaryNormalized']].groupby('Category').median().to_dict()['SalaryNormalized'])
 
@@ -72,7 +80,7 @@ def contract_time_one_hot(df):
     for contract_type in CONTRACT_TIMES:
         res['contract_time_%s' % contract_type] = (df.ContractTime.astype(str) == contract_type).astype(int)
     return res
-from collections import Counter
+
 low_salary_counter = Counter(' '.join(train_data[train_data.SalaryNormalized <= 30000].Title).lower().split())
 high_salary_counter = Counter(' '.join(train_data[train_data.SalaryNormalized > 30000].Title).lower().split())
 low_salary_counter_frequent = Counter(dict([(k,v) for (k,v) in low_salary_counter.iteritems() if v > 10]))
@@ -102,13 +110,6 @@ def num_low_salary_words(df):
     return pd.DataFrame(data=df.apply(row_num_low_salary_words, axis=1),
                         columns=['num_low_salary_words'])
 
-from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
-
-
-import hashlib
-import datetime
-import pickle
 
 def model_description(model, model_config, raw_data):
     res = {}
@@ -123,8 +124,7 @@ def model_description(model, model_config, raw_data):
         raise RuntimeError, "Unknown model type"
     return res
 
-#Declarative model training
-MODEL_SPEC = {'logistic_regression' : LogisticRegression,
+MODEL_SPEC = {'logistic_regression': LogisticRegression,
               'random_forest': RandomForestClassifier}
 
 def train_model(raw_data, model_config):
