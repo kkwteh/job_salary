@@ -1,6 +1,7 @@
 Setup instructions
 ==================
 * Download training data at https://s3.amazonaws.com/stylometry/job_salary_data.zip
+* Move job_salary_data.zip to the root directory and unzip
 * Install Miniconda. See installation instructions at http://conda.pydata.org/docs/install/quick.html
 * `$conda create --name opendoor --file conda-requirements.txt`
 * `$source activate opendoor`
