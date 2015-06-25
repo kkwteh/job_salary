@@ -1,5 +1,6 @@
-[Theory slides](https://docs.google.com/presentation/d/1YTRygbuEfKUJ7UnH-R6WRZvvVWNAe3uaARHf0ajko-g/edit?usp=sharing) by Katherine Luna
+[Theory slides](https://docs.google.com/presentation/d/1YTRygbuEfKUJ7UnH-R6WRZvvVWNAe3uaARHf0ajko-g/edit?usp=sharing)
 ================
+* Slides by Katherine Luna
 
 Setup instructions
 ==================
