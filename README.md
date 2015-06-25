@@ -5,6 +5,6 @@ Setup instructions
 * Install Miniconda. See installation instructions at http://conda.pydata.org/docs/install/quick.html
 * `$conda create --name opendoor --file conda-requirements.txt`
 * `$source activate opendoor`
-* To train model run `$python model_training.py`, or run all the cells in `model_training.ipynb`
+* To train model run `$python model_training.py`, or run all the cells in `model_training.ipynb` in an IPython Notebook
 * To run the web app locally, `$python job_salary.py`
 * To send a request to the local web app, `$python client.py`
