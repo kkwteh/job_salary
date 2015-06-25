@@ -1,0 +1,6 @@
+*.pyc
+*.zip
+*.csv
+.DS_Store
+.idea/
+model.pkl

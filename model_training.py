@@ -119,7 +119,7 @@ def model_description(model, model_config, raw_data):
     if type(model) == LogisticRegression:
         res['description'] = str(zip(raw_data.columns, list(model.coef_[0])))
     elif type(model) == RandomForestClassifier:
-        res['description'] = str(zip(raw_data.columns, list(model.feature_importances)))
+        res['description'] = str(zip(raw_data.columns, list(model.feature_importances_)))
     else:
         raise RuntimeError, "Unknown model type"
     return res
@@ -142,7 +142,7 @@ def train_model(raw_data, model_config):
 
 if __name__ == '__main__':
     model_config = {
-        'model_type': 'logistic_regression',
+        'model_type': 'random_forest',
         'feature_fns': ['category_median_salary',
                         'contract_type_one_hot',
                         'contract_time_one_hot',

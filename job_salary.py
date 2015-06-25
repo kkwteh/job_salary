@@ -2,7 +2,7 @@ import pickle
 from flask import Flask, request, jsonify
 import numpy as np
 import pandas as pd
-import job_salary_model_training
+import model_training
 
 resources = {}
 def create_app():
@@ -14,7 +14,7 @@ def create_app():
 
 app = create_app()
 
-@app.route('/predict_author', methods=['POST', 'OPTIONS'])
+@app.route('/predict', methods=['POST', 'OPTIONS'])
 def predict_author():
     json_request = request.get_json(force=True)
 
@@ -22,7 +22,7 @@ def predict_author():
     df = pd.DataFrame(columns=json_request.keys(),
                       data=[json_request.values()])
     feature_fns = resources['model'].description['model_config']['feature_fns']
-    X = job_salary_model_training.design_matrix(df, feature_fns)
+    X = model_training.design_matrix(df, feature_fns)
     prediction = resources['model'].predict(X)[0]
     return jsonify({'prediction': prediction})
 

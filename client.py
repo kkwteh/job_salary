@@ -2,7 +2,6 @@ import json
 import requests
 
 def send_prediction_request():
-    text = 'The quick brown fox jumped over the lazy dog.'
     request = {'Category': 'IT Jobs',
                'Company': 'Yolk Recruitment',
                'ContractTime': 'permanent',
@@ -14,7 +13,7 @@ def send_prediction_request():
                'Title': 'Manufacturing Toolmaker',
                }
     print json.dumps(request)
-    resp = requests.post('http://localhost:5000/predict_author',
+    resp = requests.post('http://localhost:5000/predict',
                          json.dumps(request))
     print json.loads(resp.content)
 
