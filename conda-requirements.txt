@@ -2,7 +2,7 @@
 # $ conda create --name <env> --file <this file>
 # platform: osx-64
 dateutil=2.1=py27_2
-flask=0.10.1=py27_1
+flask>=0.12.3=py27_2
 ipython=2.3.1=py27_0
 itsdangerous=0.24=py27_0
 jinja2=2.7.3=py27_1
